@@ -134,14 +134,17 @@ export default {
   height: 100px;
   position: relative;
   .icon {
+    cursor: inherit;
     position: relative;
     width: 48px;
     height: 48px;
     .rectangle {
+      cursor: inherit;
       width: 100%;
       height: 100%;
     }
     .rectangle_blur {
+      cursor: inherit;
       backdrop-filter: blur(6px);
       position: absolute;
       top: -6px;
@@ -151,11 +154,18 @@ export default {
     }
   }
   .counter {
+    cursor: inherit;
     position: absolute;
     right: 0;
     bottom: 0;
     width: 16px;
     height: 16px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #4d4d4d;
     border-top-left-radius: 6px;
   }
