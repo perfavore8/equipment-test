@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
 body {
   margin: 0;
   background-color: #1e1e1e;
@@ -30,6 +31,7 @@ body {
   box-sizing: border-box;
   cursor: url("@/assets/akar-icons_cursor.svg"), auto;
   user-select: none;
+  font-family: "Inter";
 }
 .app {
   margin: 100px auto;
