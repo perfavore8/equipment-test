@@ -1,6 +1,15 @@
 <template>
   <div class="app">
     <AsideComp class="aside" />
+    <ModalComp
+      class="modal"
+      :item="{
+        name: 'item1',
+        color: '#7FAA65',
+        colorBlur: '#80aa6559',
+        count: 3,
+      }"
+    />
     <GridComp class="grid" />
     <FooterComp class="footer" />
   </div>
@@ -10,6 +19,7 @@
 import GridComp from "./components/GridComp.vue";
 import AsideComp from "./components/AsideComp.vue";
 import FooterComp from "./components/FooterComp.vue";
+import ModalComp from "./components/ModalComp.vue";
 
 export default {
   name: "App",
@@ -17,6 +27,7 @@ export default {
     GridComp,
     AsideComp,
     FooterComp,
+    ModalComp,
   },
 };
 </script>
@@ -34,6 +45,7 @@ body {
   font-family: "Inter";
 }
 .app {
+  position: relative;
   margin: 100px auto;
   width: min-content;
   display: grid;
@@ -52,5 +64,11 @@ body {
 }
 .footer {
   grid-area: f;
+}
+.modal {
+  z-index: 5;
+  position: absolute;
+  top: 1px;
+  right: 1px;
 }
 </style>
