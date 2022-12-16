@@ -1,7 +1,7 @@
 <template>
   <footer>
     <label class="text"
-      >texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</label
+      >texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext</label
     >
     <button class="cross"><span>+</span></button>
   </footer>
