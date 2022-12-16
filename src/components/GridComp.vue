@@ -10,10 +10,10 @@
               ? onCardDrop(idx, e)
               : null
         "
-        :drop-placeholder="{ className: qwe }"
+        drag-class="drag_class"
         class="cont"
       >
-        <Draggable>
+        <Draggable :drag-not-allowed="item.name == ''">
           <div class="item">
             <template v-if="item.name">
               <div class="icon">
@@ -126,6 +126,7 @@ export default {
   border-bottom-right-radius: 12px;
 }
 .item {
+  cursor: url("@/assets/clarity_cursor-hand-line.svg"), auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,6 +170,17 @@ export default {
   }
   :deep(.animated) {
     transform: none !important;
+  }
+}
+.drag_class {
+  cursor: url("@/assets/clarity_cursor-hand-grab-line.svg"), auto;
+  width: 100px;
+  height: 100px;
+  background: #262626;
+  border: 1px solid #4d4d4d !important;
+  border-radius: 12px;
+  .counter {
+    display: none;
   }
 }
 </style>
