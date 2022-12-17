@@ -184,6 +184,7 @@ menu {
       border: 1px solid #4d4d4d;
       background-color: #262626;
       border-radius: 4px;
+      outline: none;
     }
     input[type="number"] {
       -moz-appearance: textfield;
