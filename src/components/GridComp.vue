@@ -79,32 +79,6 @@ export default {
     };
     return { removedIndex, addedIndex, onCardDrop, openItem };
   },
-
-  // data() {
-  //   return {
-  //     removedIndex: null,
-  //     addedIndex: null,
-  //   };
-  // },
-
-  // methods: {
-  //   onCardDrop(idx, dropResult) {
-  //     if (dropResult.removedIndex != null) this.removedIndex = idx;
-  //     if (dropResult.addedIndex != null) this.addedIndex = idx;
-  //     if (
-  //       this.removedIndex != null &&
-  //       this.addedIndex != null &&
-  //       !this.data[this.addedIndex].name
-  //     ) {
-  //       this.$emit("drop", this.addedIndex, this.removedIndex);
-  //       this.addedIndex = null;
-  //       this.removedIndex = null;
-  //     }
-  //   },
-  //   openItem(idx) {
-  //     if (this.data[idx].name) this.$emit("openItem", idx);
-  //   },
-  // },
 };
 </script>
 
