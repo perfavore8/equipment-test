@@ -51,29 +51,27 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import { watch } from "@vue/runtime-core";
 export default {
   props: {
     item: Object,
   },
-  data() {
-    return {
-      showConfirmDel: false,
-      countToDel: null,
+  setup(props, context) {
+    const showConfirmDel = ref(false);
+    const countToDel = ref(null);
+
+    watch(countToDel, (newVal) => {
+      if (newVal > props.item.count) countToDel.value = props.item.count;
+      if (newVal < 0) countToDel.value = 0;
+    });
+    const confirm = () => {
+      context.emit("confirmDel", countToDel.value);
     };
-  },
-  watch: {
-    countToDel(newVal) {
-      if (newVal > this.item.count) this.countToDel = this.item.count;
-      if (newVal < 0) this.countToDel = 0;
-    },
-  },
-  methods: {
-    confirm() {
-      this.$emit("confirmDel", this.countToDel);
-    },
-    close() {
-      this.$emit("close");
-    },
+    const close = () => {
+      context.emit("close");
+    };
+    return { showConfirmDel, countToDel, confirm, close };
   },
 };
 </script>

@@ -41,6 +41,7 @@
 
 <script>
 import { Container, Draggable } from "vue-dndrop";
+import { ref } from "@vue/reactivity";
 
 export default {
   name: "GridComp",
@@ -56,31 +57,54 @@ export default {
     },
   },
 
-  data() {
-    return {
-      removedIndex: null,
-      addedIndex: null,
+  setup(props, context) {
+    const removedIndex = ref(null);
+    const addedIndex = ref(null);
+
+    const onCardDrop = (idx, dropResult) => {
+      if (dropResult.removedIndex != null) removedIndex.value = idx;
+      if (dropResult.addedIndex != null) addedIndex.value = idx;
+      if (
+        removedIndex.value != null &&
+        addedIndex.value != null &&
+        !props.data[addedIndex.value].name
+      ) {
+        context.emit("drop", addedIndex.value, removedIndex.value);
+        addedIndex.value = null;
+        removedIndex.value = null;
+      }
     };
+    const openItem = (idx) => {
+      if (props.data[idx].name) context.emit("openItem", idx);
+    };
+    return { removedIndex, addedIndex, onCardDrop, openItem };
   },
 
-  methods: {
-    onCardDrop(idx, dropResult) {
-      if (dropResult.removedIndex != null) this.removedIndex = idx;
-      if (dropResult.addedIndex != null) this.addedIndex = idx;
-      if (
-        this.removedIndex != null &&
-        this.addedIndex != null &&
-        !this.data[this.addedIndex].name
-      ) {
-        this.$emit("drop", this.addedIndex, this.removedIndex);
-        this.addedIndex = null;
-        this.removedIndex = null;
-      }
-    },
-    openItem(idx) {
-      if (this.data[idx].name) this.$emit("openItem", idx);
-    },
-  },
+  // data() {
+  //   return {
+  //     removedIndex: null,
+  //     addedIndex: null,
+  //   };
+  // },
+
+  // methods: {
+  //   onCardDrop(idx, dropResult) {
+  //     if (dropResult.removedIndex != null) this.removedIndex = idx;
+  //     if (dropResult.addedIndex != null) this.addedIndex = idx;
+  //     if (
+  //       this.removedIndex != null &&
+  //       this.addedIndex != null &&
+  //       !this.data[this.addedIndex].name
+  //     ) {
+  //       this.$emit("drop", this.addedIndex, this.removedIndex);
+  //       this.addedIndex = null;
+  //       this.removedIndex = null;
+  //     }
+  //   },
+  //   openItem(idx) {
+  //     if (this.data[idx].name) this.$emit("openItem", idx);
+  //   },
+  // },
 };
 </script>
 

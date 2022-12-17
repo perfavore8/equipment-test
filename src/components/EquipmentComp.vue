@@ -20,6 +20,8 @@ import GridComp from "@/components/GridComp.vue";
 import AsideComp from "@/components/AsideComp.vue";
 import FooterComp from "@/components/FooterComp.vue";
 import ModalComp from "@/components/ModalComp.vue";
+import { reactive, ref } from "@vue/reactivity";
+import { onMounted, watch } from "@vue/runtime-core";
 export default {
   components: {
     GridComp,
@@ -27,70 +29,75 @@ export default {
     FooterComp,
     ModalComp,
   },
-  data() {
-    return {
-      showModal: false,
-      selectedItemIdx: null,
-      data: [
-        { name: "item1", color: "#7FAA65", colorBlur: "#80aa6559", count: 3 },
-        { name: "item2", color: "#AA9765", colorBlur: "#aa976559", count: 4 },
-        { name: "item3", color: "#656CAA", colorBlur: "#656caa59", count: 7 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-      ],
-    };
-  },
 
-  mounted() {
-    this.data = JSON.parse(localStorage.getItem("data"));
-  },
+  setup() {
+    const showModal = ref(false);
+    const selectedItemIdx = ref(null);
+    const data = reactive([
+      { name: "item1", color: "#7FAA65", colorBlur: "#80aa6559", count: 3 },
+      { name: "item2", color: "#AA9765", colorBlur: "#aa976559", count: 4 },
+      { name: "item3", color: "#656CAA", colorBlur: "#656caa59", count: 7 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+      { name: "", count: 0 },
+    ]);
 
-  watch: {
-    data: {
-      handler: function () {
-        localStorage.setItem("data", JSON.stringify(this.data));
+    onMounted(() =>
+      Object.assign(data, JSON.parse(localStorage.getItem("data")))
+    );
+
+    watch(
+      () => data,
+      () => {
+        localStorage.setItem("data", JSON.stringify(data));
       },
-      deep: true,
-    },
-  },
+      { deep: true }
+    );
 
-  methods: {
-    openItem(idx) {
-      this.selectedItemIdx = idx;
-      this.showModal = true;
-    },
-    confirmDel(idx, count) {
-      this.data[idx].count -= count;
-      this.closeComp();
-    },
-    closeComp() {
-      this.selectedItemIdx = null;
-      this.showModal = false;
-    },
-    drop(addedIndex, removedIndex) {
-      this.data[addedIndex] = this.data[removedIndex];
-      this.data[removedIndex] = { name: "", count: 0 };
-    },
+    const openItem = (idx) => {
+      selectedItemIdx.value = idx;
+      showModal.value = true;
+    };
+    const confirmDel = (idx, count) => {
+      data[idx].count -= count;
+      closeComp();
+    };
+    const closeComp = () => {
+      selectedItemIdx.value = null;
+      showModal.value = false;
+    };
+    const drop = (addedIndex, removedIndex) => {
+      data[addedIndex] = data[removedIndex];
+      data[removedIndex] = { name: "", count: 0 };
+    };
+    return {
+      showModal,
+      selectedItemIdx,
+      data,
+      openItem,
+      confirmDel,
+      closeComp,
+      drop,
+    };
   },
 };
 </script>
