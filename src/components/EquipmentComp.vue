@@ -14,7 +14,7 @@
         v-if="showModal"
       />
     </transition>
-    <GridComp class="grid" @openItem="openItem" />
+    <GridComp class="grid" @openItem="openItem" @drop="drop" :data="data" />
     <FooterComp class="footer" />
   </div>
 </template>
@@ -34,6 +34,33 @@ export default {
   data() {
     return {
       showModal: false,
+      data: [
+        { name: "item1", color: "#7FAA65", colorBlur: "#80aa6559", count: 3 },
+        { name: "item2", color: "#AA9765", colorBlur: "#aa976559", count: 4 },
+        { name: "item3", color: "#656CAA", colorBlur: "#656caa59", count: 7 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+        { name: "", count: 0 },
+      ],
     };
   },
   methods: {
@@ -44,6 +71,10 @@ export default {
     confirmDel(item, count) {
       console.log(item, count);
       this.showModal = false;
+    },
+    drop(addedIndex, removedIndex) {
+      this.data[addedIndex] = this.data[removedIndex];
+      this.data[removedIndex] = { name: "", count: 0 };
     },
   },
 };

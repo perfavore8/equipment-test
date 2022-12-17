@@ -43,37 +43,19 @@ export default {
 
   components: { Container, Draggable },
 
+  props: {
+    data: {
+      type: Array,
+      default() {
+        return [{ name: "", color: "", colorBlur: "", count: null }];
+      },
+    },
+  },
+
   data() {
     return {
       removedIndex: null,
       addedIndex: null,
-      data: [
-        { name: "item1", color: "#7FAA65", colorBlur: "#80aa6559", count: 3 },
-        { name: "item2", color: "#AA9765", colorBlur: "#aa976559", count: 4 },
-        { name: "item3", color: "#656CAA", colorBlur: "#656caa59", count: 7 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-        { name: "", count: 0 },
-      ],
     };
   },
 
@@ -86,8 +68,7 @@ export default {
         this.addedIndex != null &&
         !this.data[this.addedIndex].name
       ) {
-        this.data[this.addedIndex] = this.data[this.removedIndex];
-        this.data[this.removedIndex] = { name: "", count: 0 };
+        this.$emit("drop", this.addedIndex, this.removedIndex);
         this.addedIndex = null;
         this.removedIndex = null;
       }
