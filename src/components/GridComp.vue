@@ -14,7 +14,7 @@
         class="cont"
       >
         <Draggable :drag-not-allowed="item.name == ''">
-          <div class="item">
+          <div class="item" @click="openItem(idx)">
             <template v-if="item.name">
               <div class="icon">
                 <div
@@ -91,6 +91,9 @@ export default {
         this.addedIndex = null;
         this.removedIndex = null;
       }
+    },
+    openItem(idx) {
+      this.$emit("openItem", idx);
     },
   },
 };

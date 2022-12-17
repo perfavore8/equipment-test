@@ -59,7 +59,9 @@ export default {
     };
   },
   methods: {
-    confirm() {},
+    confirm() {
+      this.$emit("confirmDel", this.item, this.countToDel);
+    },
   },
 };
 </script>
