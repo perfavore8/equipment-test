@@ -14,7 +14,11 @@
         class="cont"
       >
         <Draggable :drag-not-allowed="item.name == ''">
-          <div class="item" @click="openItem(idx)">
+          <div
+            class="item"
+            @click="openItem(idx)"
+            :class="{ defaultCursor: !item.name }"
+          >
             <template v-if="item.name">
               <div class="icon">
                 <div
@@ -74,7 +78,7 @@ export default {
       }
     },
     openItem(idx) {
-      this.$emit("openItem", idx);
+      if (this.data[idx].name) this.$emit("openItem", idx);
     },
   },
 };
@@ -176,5 +180,8 @@ export default {
   .counter {
     display: none;
   }
+}
+.defaultCursor {
+  cursor: url("@/assets/akar-icons_cursor.svg"), auto;
 }
 </style>
