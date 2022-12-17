@@ -6,6 +6,7 @@
         class="modal"
         :item="data[selectedItemIdx]"
         @confirmDel="(count) => confirmDel(selectedItemIdx, count)"
+        @close="closeComp"
         v-if="showModal"
       />
     </transition>
@@ -19,7 +20,6 @@ import GridComp from "@/components/GridComp.vue";
 import AsideComp from "@/components/AsideComp.vue";
 import FooterComp from "@/components/FooterComp.vue";
 import ModalComp from "@/components/ModalComp.vue";
-import { nextTick } from "@vue/runtime-core";
 export default {
   components: {
     GridComp,
@@ -62,14 +62,14 @@ export default {
   },
   methods: {
     openItem(idx) {
-      console.log(idx);
-      this.showModal = false;
       this.selectedItemIdx = idx;
-      nextTick(() => (this.showModal = true));
+      this.showModal = true;
     },
     confirmDel(idx, count) {
-      console.log(count);
       this.data[idx].count -= count;
+      this.closeComp();
+    },
+    closeComp() {
       this.selectedItemIdx = null;
       this.showModal = false;
     },
@@ -102,12 +102,6 @@ export default {
 }
 .footer {
   grid-area: f;
-}
-.modal {
-  z-index: 5;
-  position: absolute;
-  top: 1px;
-  right: 1px;
 }
 .modal-enter-active,
 .modal-leave-active {

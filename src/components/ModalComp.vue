@@ -1,6 +1,7 @@
 <template>
+  <div class="bg" @click="close()"></div>
   <menu>
-    <button class="cross"><span>+</span></button>
+    <button class="cross" @click="close()" />
     <div class="icon">
       <div class="rectangle" :style="{ backgroundColor: item.color }" />
       <div
@@ -70,12 +71,29 @@ export default {
     confirm() {
       this.$emit("confirmDel", this.countToDel);
     },
+    close() {
+      this.$emit("close");
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.bg {
+  width: 100%;
+  height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
 menu {
+  z-index: 5;
+  position: absolute;
+  top: 1px;
+  right: 1px;
   margin: 0;
   height: 499px;
   padding: 16px;
@@ -127,12 +145,10 @@ menu {
     padding: 6px;
     background-color: transparent;
     border: none;
-    span {
-      color: white;
-      font-size: 24px;
-      font-weight: 300;
-      transform: rotate(45deg);
-    }
+    background-image: url("@/assets/cross.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
   }
   section {
     height: 100%;
