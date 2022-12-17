@@ -226,6 +226,7 @@ menu {
         border: none;
         font-size: 14px;
         background: #ffffff;
+        box-shadow: 0px 0px 14px 1px white;
         border-radius: 8px;
       }
       .confirm_btn {
@@ -238,6 +239,7 @@ menu {
         border: none;
         font-size: 14px;
         background: #fa7272;
+        box-shadow: 0px 0px 14px 1px #fa7272;
         border-radius: 8px;
       }
     }
