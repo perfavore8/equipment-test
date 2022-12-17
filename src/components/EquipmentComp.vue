@@ -4,12 +4,7 @@
     <transition name="modal">
       <ModalComp
         class="modal"
-        :item="{
-          name: 'item1',
-          color: '#7FAA65',
-          colorBlur: '#80aa6559',
-          count: 3,
-        }"
+        :item="data[selectedItemIdx]"
         @confirmDel="confirmDel"
         v-if="showModal"
       />
@@ -34,6 +29,7 @@ export default {
   data() {
     return {
       showModal: false,
+      selectedItemIdx: null,
       data: [
         { name: "item1", color: "#7FAA65", colorBlur: "#80aa6559", count: 3 },
         { name: "item2", color: "#AA9765", colorBlur: "#aa976559", count: 4 },
@@ -66,10 +62,12 @@ export default {
   methods: {
     openItem(idx) {
       console.log(idx);
+      this.selectedItemIdx = idx;
       this.showModal = true;
     },
     confirmDel(item, count) {
       console.log(item, count);
+      this.selectedItemIdx = null;
       this.showModal = false;
     },
     drop(addedIndex, removedIndex) {
