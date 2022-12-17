@@ -60,6 +60,20 @@ export default {
       ],
     };
   },
+
+  mounted() {
+    this.data = JSON.parse(localStorage.getItem("data"));
+  },
+
+  watch: {
+    data: {
+      handler: function () {
+        localStorage.setItem("data", JSON.stringify(this.data));
+      },
+      deep: true,
+    },
+  },
+
   methods: {
     openItem(idx) {
       this.selectedItemIdx = idx;
