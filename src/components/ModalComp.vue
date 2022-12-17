@@ -36,6 +36,8 @@
         type="number"
         placeholder="Введите количество"
         v-model="countToDel"
+        step="1"
+        onchange="this.value = parseInt(this.value);"
       />
       <div class="btns">
         <button class="dismiss_btn" @click="showConfirmDel = fasle">
@@ -58,9 +60,15 @@ export default {
       countToDel: null,
     };
   },
+  watch: {
+    countToDel(newVal) {
+      if (newVal > this.item.count) this.countToDel = this.item.count;
+      if (newVal < 0) this.countToDel = 0;
+    },
+  },
   methods: {
     confirm() {
-      this.$emit("confirmDel", this.item, this.countToDel);
+      this.$emit("confirmDel", this.countToDel);
     },
   },
 };
