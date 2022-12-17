@@ -16,12 +16,12 @@
         texttexttexttext texttexttext texttexttext texttexttext
       </p>
       <p class="text">texttexttexttext texttexttext texttexttext</p>
-      <!-- <p class="text">
+      <p class="text">
         texttexttexttext texttexttext texttexttext texttexttext
       </p>
       <p class="text">
         texttexttexttext texttexttext texttexttext texttexttext
-      </p> -->
+      </p>
       <p class="text">texttexttexttext texttexttext texttexttext</p>
     </section>
     <div class="br" />
