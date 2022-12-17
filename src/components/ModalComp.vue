@@ -185,6 +185,16 @@ menu {
       background-color: #262626;
       border-radius: 4px;
     }
+    input[type="number"] {
+      -moz-appearance: textfield;
+      -webkit-appearance: textfield;
+      appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      display: none;
+    }
     .btns {
       display: flex;
       flex-direction: row;
